@@ -9,7 +9,8 @@ const refs = {
   boxesForDiv: document.querySelector('#boxes'),
 };
 
-const arreyDiv = [];
+let arreyDiv = '';
+let size = 30;
 
 refs.createButton.addEventListener('click', addBoxes);
 
@@ -19,21 +20,21 @@ function addBoxes() {
   createBoxes(Number(refs.inputNumber.value));
 
   refs.boxesForDiv.insertAdjacentHTML('beforeend', arreyDiv);
-  refs.inputNumber.value = '';
+  refs.inputNumber.value = ''; //очистка інпута
 }
 
 function createBoxes(amount) {
-  let size = 30;
+  arreyDiv = '';
   for (let i = 0; i < amount; i += 1) {
-    arreyDiv.push(
-      `<div style="background-color: ${getRandomHexColor()}; width: ${size}px; height: ${size}px;"></div>`
-    );
+    arreyDiv += `<div style="background-color: ${getRandomHexColor()}; width: ${size}px; height: ${size}px;"></div>`;
     size += 10;
   }
-  return arreyDiv.join('');
+  return arreyDiv;
 }
 
 function destroyBoxes() {
+  size = 30;
+  arreyDiv = '';
   refs.boxesForDiv.innerHTML = '';
   refs.inputNumber.value = '';
 }
